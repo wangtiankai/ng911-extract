@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "ng911-extract: A reproducible pipeline for state-year Next Generation 911 deployment data from public Profile Database reports"
+authors:
+  - family-names: "Wang"
+    given-names: "Tiankai"
+    orcid: "0000-0003-0083-0218"
+date-released: 2026-09-04
+license: MIT
+repository-code: "https://github.com/wangtiankai/ng911-extract"
+keywords:
+  - Python
+  - public-safety
+  - emergency-services
+  - 911
+  - data-extraction
+  - panel-data

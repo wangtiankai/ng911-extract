@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ng911-extract"
+version = "0.1.0"
+description = "Reproducible pipeline for state-year Next Generation 911 deployment data from public Profile Database reports"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "Author Name"}]
+dependencies = [
+    "pypdf>=3.0",
+    "pandas>=1.5",
+    "numpy>=1.23",
+    "statsmodels>=0.14",
+]
+
+[tool.setuptools]
+packages = ["ng911_extract"]
