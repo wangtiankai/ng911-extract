@@ -20,3 +20,4 @@ Thumbs.db
 # Project-specific dev files (kept out of public repo)
 *.tmp
 *.bak
+PUSH_INSTRUCTIONS.md
