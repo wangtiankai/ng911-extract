@@ -2,6 +2,8 @@
 
 Reproducible pipeline for state-by-year Next Generation 911 deployment data from public Profile Database Progress Reports.
 
+Maintainers follow a [monthly update checklist](MAINTENANCE.md) (tests, docs, small enhancements).
+
 ## What it does
 
 Ingests eight annual PDF reports hosted at `911.gov` (the U.S. National 911 Program), extracts the state-by-state NG911 deployment grid from each, and stacks them into a single tidy CSV at `data/ng911/state_ng911_panel.csv` (392 rows = 56 jurisdictions × 7 data years).

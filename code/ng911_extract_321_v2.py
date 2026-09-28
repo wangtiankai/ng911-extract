@@ -150,27 +150,33 @@ def normalize(val, fmt):
         except ValueError: return None
     return val
 
-for fname, year in REPORTS:
-    print(f'== {year} ==')
-    r = pypdf.PdfReader(os.path.join(PDF_DIR, fname))
-    panel = {fips: {'state_fips': fips, 'state_name': name, 'year': year} for fips, name in FIPS_TO_NAME.items()}
-    for short, sec_pat, head_pat, fmt in FIELDS:
-        text, page = find_data_page(r, sec_pat, head_pat)
-        if text is None:
-            print(f'  [{year}] {short}: section page not found')
-            continue
-        vals = parse_grid(text, fmt)
-        if not vals:
-            print(f'  [{year}] {short}: no grid parsed on p{page}')
-            continue
-        for abbr, raw in vals.items():
-            fips = ABBR_TO_FIPS[abbr]
-            panel[fips][short] = normalize(raw, fmt)
-        print(f'  [{year}] {short}: {len(vals)} states from p{page}')
-    out = os.path.join(OUT_DIR, f'state_ng911_panel_{year}.csv')
-    fieldnames = ['state_fips','state_name','year'] + [s for s,_,_,_ in FIELDS]
-    with open(out,'w',newline='') as fh:
-        w = csv.DictWriter(fh, fieldnames=fieldnames, extrasaction='ignore')
-        w.writeheader()
-        for fips in sorted(panel): w.writerow(panel[fips])
-    print(f'  wrote {out}')
+def main() -> None:
+    for fname, year in REPORTS:
+        print(f'== {year} ==')
+        r = pypdf.PdfReader(os.path.join(PDF_DIR, fname))
+        panel = {fips: {'state_fips': fips, 'state_name': name, 'year': year} for fips, name in FIPS_TO_NAME.items()}
+        for short, sec_pat, head_pat, fmt in FIELDS:
+            text, page = find_data_page(r, sec_pat, head_pat)
+            if text is None:
+                print(f'  [{year}] {short}: section page not found')
+                continue
+            vals = parse_grid(text, fmt)
+            if not vals:
+                print(f'  [{year}] {short}: no grid parsed on p{page}')
+                continue
+            for abbr, raw in vals.items():
+                fips = ABBR_TO_FIPS[abbr]
+                panel[fips][short] = normalize(raw, fmt)
+            print(f'  [{year}] {short}: {len(vals)} states from p{page}')
+        out = os.path.join(OUT_DIR, f'state_ng911_panel_{year}.csv')
+        fieldnames = ['state_fips','state_name','year'] + [s for s,_,_,_ in FIELDS]
+        with open(out,'w',newline='') as fh:
+            w = csv.DictWriter(fh, fieldnames=fieldnames, extrasaction='ignore')
+            w.writeheader()
+            for fips in sorted(panel):
+                w.writerow(panel[fips])
+        print(f'  wrote {out}')
+
+
+if __name__ == '__main__':
+    main()
