@@ -5,7 +5,7 @@ title: "ng911-extract: A reproducible pipeline for state-year Next Generation 91
 authors:
   - family-names: "Wang"
     given-names: "Tiankai"
-    orcid: "0000-0003-0083-0218"
+    orcid: "https://orcid.org/0000-0003-0083-0218"
 date-released: 2026-09-04
 license: MIT
 repository-code: "https://github.com/wangtiankai/ng911-extract"
@@ -13,6 +13,6 @@ keywords:
   - Python
   - public-safety
   - emergency-services
-  - 911
+  - "911"
   - data-extraction
   - panel-data
